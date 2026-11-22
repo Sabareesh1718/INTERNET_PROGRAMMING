@@ -1,0 +1,360 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AgriMart</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background-color: #f7f5e9;
+            margin: 0;
+        }
+
+        header {
+            background-color: #285c36;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .search {
+            background-color: #dce9d5;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .products {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .product {
+            display: inline-block;
+            background-color: white;
+            border: 1px solid #b5c9a9;
+            width: 25%;
+            padding: 15px;
+            margin: 10px;
+            vertical-align: top;
+        }
+
+        .panels {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .panel {
+            background-color: white;
+            border: 1px solid #b5c9a9;
+            padding: 18px;
+            flex: 1;
+        }
+
+        h2 {
+            color: #285c36;
+        }
+
+        input, select {
+            padding: 8px;
+            margin: 7px 0;
+            width: 90%;
+        }
+
+        button {
+            background-color: #397b45;
+            color: white;
+            padding: 9px 13px;
+            border: none;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        footer {
+            background-color: #285c36;
+            color: white;
+            padding: 12px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>AgriMart</h1>
+    <p>Your Complete Agricultural Shopping Platform</p>
+</header>
+
+<div class="search">
+    <h2>Find Agricultural Products</h2>
+
+    <input type="text" id="searchBox" placeholder="Search seeds, fertilizers, tools...">
+
+    <select id="category">
+        <option>All Categories</option>
+        <option>Seeds</option>
+        <option>Fertilizers</option>
+        <option>Pesticides</option>
+        <option>Equipment</option>
+    </select>
+
+    <button onclick="searchProduct()">Search</button>
+</div>
+
+<div class="products">
+    <h2>Available Products</h2>
+
+    <div class="product">
+        <h3>Rice Seeds</h3>
+        <p>Category: Seeds</p>
+        <p>Price: ₹500</p>
+        <button onclick="viewProduct('Rice Seeds')">View Details</button>
+        <button onclick="addCart('Rice Seeds')">Add to Cart</button>
+    </div>
+
+    <div class="product">
+        <h3>Organic Fertilizer</h3>
+        <p>Category: Fertilizers</p>
+        <p>Price: ₹350</p>
+        <button onclick="viewProduct('Organic Fertilizer')">View Details</button>
+        <button onclick="addCart('Organic Fertilizer')">Add to Cart</button>
+    </div>
+
+    <div class="product">
+        <h3>Garden Sprayer</h3>
+        <p>Category: Equipment</p>
+        <p>Price: ₹900</p>
+        <button onclick="viewProduct('Garden Sprayer')">View Details</button>
+        <button onclick="addCart('Garden Sprayer')">Add to Cart</button>
+    </div>
+</div>
+
+<div class="panels">
+
+    <!-- FARMER PANEL -->
+
+    <div class="panel">
+        <h2>Farmer Panel</h2>
+
+        <h3>Farmer Registration</h3>
+
+        <form onsubmit="registerFarmer(event)">
+            <input type="text" placeholder="Farmer Name" required>
+            <input type="email" placeholder="Email" required>
+            <input type="password" placeholder="Password" required>
+            <button type="submit">Register</button>
+        </form>
+
+        <h3>Farmer Login</h3>
+
+        <form onsubmit="loginFarmer(event)">
+            <input type="email" placeholder="Email" required>
+            <input type="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+
+        <h3>OTP Verification</h3>
+        <input type="text" placeholder="Enter OTP">
+        <button onclick="verifyOTP()">Verify OTP</button>
+
+        <hr>
+
+        <h3>Add Product</h3>
+
+        <form onsubmit="addProduct(event)">
+            <input type="text" placeholder="Product Name" required>
+            <input type="number" placeholder="Product Price" required>
+            <input type="file">
+            <button type="submit">Upload Product</button>
+        </form>
+
+        <button onclick="updateProduct()">Update Product</button>
+        <button onclick="deleteProduct()">Delete Product</button>
+
+        <hr>
+
+        <h3>Farmer Orders</h3>
+        <button onclick="manageOrders()">Manage Orders</button>
+        <button onclick="updateOrder()">Update Order Status</button>
+        <button onclick="shippingStatus()">Update Shipping Status</button>
+        <button onclick="mySales()">My Sales</button>
+
+        <br>
+        <button onclick="logout()">Logout</button>
+    </div>
+
+    <!-- PUBLIC / CUSTOMER PANEL -->
+
+    <div class="panel">
+        <h2>Customer Panel</h2>
+
+        <h3>Customer Registration</h3>
+
+        <form onsubmit="registerCustomer(event)">
+            <input type="text" placeholder="Customer Name" required>
+            <input type="email" placeholder="Email" required>
+            <input type="password" placeholder="Password" required>
+            <button type="submit">Register</button>
+        </form>
+
+        <h3>Customer Login</h3>
+
+        <form onsubmit="loginCustomer(event)">
+            <input type="email" placeholder="Email" required>
+            <input type="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+
+        <h3>OTP Verification</h3>
+        <input type="text" placeholder="Enter OTP">
+        <button onclick="verifyOTP()">Verify OTP</button>
+
+        <hr>
+
+        <h3>My Account and Wallet</h3>
+        <p>Wallet Balance: ₹2000</p>
+        <button onclick="wallet()">Manage Wallet</button>
+        <button onclick="myAccount()">My Account</button>
+
+        <hr>
+
+        <h3>Shopping Cart</h3>
+        <p id="cartItems">Cart is empty</p>
+        <button onclick="editCart()">Edit Cart</button>
+        <button onclick="deleteCart()">Delete Cart</button>
+
+        <hr>
+
+        <h3>Shipping Address</h3>
+        <input type="text" placeholder="Enter Shipping Address">
+        <button onclick="saveAddress()">Save Address</button>
+
+        <hr>
+
+        <h3>Orders</h3>
+        <button onclick="orderProduct()">Order Product</button>
+        <button onclick="orderStatus()">My Order Status</button>
+        <button onclick="viewShipping()">View Shipping Status</button>
+    </div>
+
+</div>
+
+<footer>
+    <p>AgriMart - Supporting Farmers, Growing Agriculture</p>
+</footer>
+
+<script>
+    let cart = [];
+
+    function searchProduct() {
+        let name = document.getElementById("searchBox").value;
+        alert("Searching for " + name);
+    }
+
+    function viewProduct(name) {
+        alert("Product Details: " + name);
+    }
+
+    function addCart(name) {
+        cart.push(name);
+        document.getElementById("cartItems").innerHTML =
+            cart.join(", ");
+        alert(name + " added to cart!");
+    }
+
+    function registerFarmer(event) {
+        event.preventDefault();
+        alert("Farmer registered successfully!");
+    }
+
+    function loginFarmer(event) {
+        event.preventDefault();
+        alert("Farmer login successful!");
+    }
+
+    function registerCustomer(event) {
+        event.preventDefault();
+        alert("Customer registered successfully!");
+    }
+
+    function loginCustomer(event) {
+        event.preventDefault();
+        alert("Customer login successful!");
+    }
+
+    function verifyOTP() {
+        alert("OTP verified successfully!");
+    }
+
+    function addProduct(event) {
+        event.preventDefault();
+        alert("Product uploaded successfully!");
+    }
+
+    function updateProduct() {
+        alert("Product updated successfully!");
+    }
+
+    function deleteProduct() {
+        alert("Product deleted successfully!");
+    }
+
+    function manageOrders() {
+        alert("Displaying farmer orders!");
+    }
+
+    function updateOrder() {
+        alert("Order status updated!");
+    }
+
+    function shippingStatus() {
+        alert("Shipping status updated!");
+    }
+
+    function mySales() {
+        alert("Displaying sales details!");
+    }
+
+    function wallet() {
+        alert("Wallet management opened!");
+    }
+
+    function myAccount() {
+        alert("Displaying customer account!");
+    }
+
+    function editCart() {
+        alert("Cart editing selected!");
+    }
+
+    function deleteCart() {
+        cart = [];
+        document.getElementById("cartItems").innerHTML = "Cart is empty";
+        alert("Cart cleared!");
+    }
+
+    function saveAddress() {
+        alert("Shipping address saved!");
+    }
+
+    function orderProduct() {
+        alert("Order placed successfully!");
+    }
+
+    function orderStatus() {
+        alert("Your order is being processed!");
+    }
+
+    function viewShipping() {
+        alert("Shipping status: Dispatched");
+    }
+
+    function logout() {
+        alert("Logged out successfully!");
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,328 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>RentRide - Vehicle Rental</title>
+    <style>
+        body {
+            font-family: Arial;
+            margin: 0;
+            background: #eef3f7;
+            color: #263746;
+        }
+
+        header {
+            background: #263746;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav {
+            background: #168aad;
+            padding: 12px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 15px;
+        }
+
+        h2 {
+            color: #168aad;
+        }
+
+        section {
+            background: white;
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ccd6df;
+        }
+
+        input, select, textarea {
+            padding: 9px;
+            margin: 7px;
+            border: 1px solid #aaa;
+        }
+
+        button {
+            background: #168aad;
+            color: white;
+            padding: 10px 18px;
+            border: none;
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ccd6df;
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background: #d9edf5;
+        }
+
+        footer {
+            background: #263746;
+            color: white;
+            text-align: center;
+            padding: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>RentRide</h1>
+    <p>Find Your Ride, Enjoy Your Journey</p>
+</header>
+
+<nav>
+    <a href="#home">Home</a>
+    <a href="#search">Search Vehicles</a>
+    <a href="#booking">Book Vehicle</a>
+    <a href="#login">Login</a>
+    <a href="#admin">Admin</a>
+</nav>
+
+<section id="home">
+    <h2>Welcome to RentRide</h2>
+    <p>Rent cars, trucks and SUVs at affordable prices.
+       Choose your vehicle and book it easily online.</p>
+</section>
+
+<section id="search">
+    <h2>Search Vehicles</h2>
+
+    <form>
+        Location:
+        <input type="text" placeholder="Enter location">
+
+        Vehicle Type:
+        <select>
+            <option>All Vehicles</option>
+            <option>Car</option>
+            <option>SUV</option>
+            <option>Truck</option>
+        </select>
+
+        From Date:
+        <input type="date">
+
+        To Date:
+        <input type="date">
+
+        <button type="button" onclick="alert('Searching vehicles...')">
+            Search
+        </button>
+    </form>
+</section>
+
+<section>
+    <h2>Available Vehicles</h2>
+
+    <table>
+        <tr>
+            <th>Vehicle</th>
+            <th>Type</th>
+            <th>Location</th>
+            <th>Price Per Day</th>
+            <th>Action</th>
+        </tr>
+
+        <tr>
+            <td>Hyundai i20</td>
+            <td>Car</td>
+            <td>Chennai</td>
+            <td>₹1500</td>
+            <td><button onclick="alert('Selected Hyundai i20')">Select</button></td>
+        </tr>
+
+        <tr>
+            <td>Mahindra Thar</td>
+            <td>SUV</td>
+            <td>Chennai</td>
+            <td>₹3000</td>
+            <td><button onclick="alert('Selected Mahindra Thar')">Select</button></td>
+        </tr>
+
+        <tr>
+            <td>Tata Ace</td>
+            <td>Truck</td>
+            <td>Coimbatore</td>
+            <td>₹2500</td>
+            <td><button onclick="alert('Selected Tata Ace')">Select</button></td>
+        </tr>
+    </table>
+</section>
+
+<section id="booking">
+    <h2>Vehicle Booking</h2>
+
+    <form onsubmit="alert('Booking submitted successfully!'); return false;">
+        Customer Name:
+        <input type="text" required placeholder="Enter name"><br>
+
+        Customer Number:
+        <input type="tel" required placeholder="Phone number"><br>
+
+        Address:
+        <textarea placeholder="Enter address"></textarea><br>
+
+        Select Vehicle:
+        <select>
+            <option>Hyundai i20</option>
+            <option>Mahindra Thar</option>
+            <option>Tata Ace</option>
+        </select><br>
+
+        Rental Start Date:
+        <input type="date"><br>
+
+        Rental End Date:
+        <input type="date"><br>
+
+        <button type="submit">Confirm Booking</button>
+    </form>
+</section>
+
+<section>
+    <h2>My Bookings</h2>
+
+    <table>
+        <tr>
+            <th>Booking ID</th>
+            <th>Vehicle</th>
+            <th>Date</th>
+            <th>Status</th>
+        </tr>
+
+        <tr>
+            <td>RR101</td>
+            <td>Hyundai i20</td>
+            <td>20-11-2026</td>
+            <td>Approved</td>
+        </tr>
+
+        <tr>
+            <td>RR102</td>
+            <td>Mahindra Thar</td>
+            <td>22-11-2026</td>
+            <td>Pending</td>
+        </tr>
+    </table>
+</section>
+
+<section>
+    <h2>Customer Review</h2>
+
+    <form onsubmit="alert('Review submitted!'); return false;">
+        Name:
+        <input type="text" placeholder="Enter name">
+
+        Rating:
+        <select>
+            <option>5 - Excellent</option>
+            <option>4 - Good</option>
+            <option>3 - Average</option>
+            <option>2 - Poor</option>
+            <option>1 - Very Poor</option>
+        </select><br>
+
+        Review:
+        <textarea placeholder="Write your review"></textarea><br>
+
+        <button type="submit">Submit Review</button>
+    </form>
+</section>
+
+<section id="login">
+    <h2>User Registration and Login</h2>
+
+    <form onsubmit="alert('User details submitted!'); return false;">
+        Name:
+        <input type="text" placeholder="Enter name"><br>
+
+        Email:
+        <input type="email" placeholder="Enter email"><br>
+
+        Password:
+        <input type="password" placeholder="Enter password"><br>
+
+        <button type="submit">Register</button>
+        <button type="button" onclick="alert('Login successful!')">Login</button>
+    </form>
+</section>
+
+<section id="admin">
+    <h2>Admin Login</h2>
+
+    <form onsubmit="alert('Admin login submitted!'); return false;">
+        Username:
+        <input type="text" placeholder="Admin username"><br>
+
+        Password:
+        <input type="password" placeholder="Password"><br>
+
+        <button type="submit">Login</button>
+    </form>
+
+    <h2>Add Vehicle</h2>
+
+    <form onsubmit="alert('Vehicle details added!'); return false;">
+        Vehicle Name:
+        <input type="text" placeholder="Vehicle name">
+
+        Type:
+        <select>
+            <option>Car</option>
+            <option>SUV</option>
+            <option>Truck</option>
+        </select><br>
+
+        Location:
+        <input type="text" placeholder="Location">
+
+        Price Per Day:
+        <input type="number" placeholder="Price"><br>
+
+        <button type="submit">Add Vehicle</button>
+    </form>
+
+    <h2>Manage Bookings</h2>
+
+    <table>
+        <tr>
+            <th>Booking ID</th>
+            <th>Customer</th>
+            <th>Vehicle</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+
+        <tr>
+            <td>RR101</td>
+            <td>Arun</td>
+            <td>Hyundai i20</td>
+            <td>Pending</td>
+            <td><button onclick="alert('Booking approved!')">Approve</button></td>
+        </tr>
+    </table>
+</section>
+
+<footer>
+    <p>RentRide Online Vehicle Rental System</p>
+    <p>24/7 Customer Support | Contact: support@rentride.com</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,266 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>VoteOnline</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background-color: #f2eff8;
+            margin: 0;
+        }
+
+        header {
+            background-color: #513878;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .voting-area {
+            background-color: white;
+            width: 55%;
+            margin: 25px auto;
+            padding: 22px;
+            border: 2px solid #b9a7d5;
+            text-align: center;
+        }
+
+        .admin-area {
+            background-color: #d9f0e5;
+            padding: 25px;
+            margin: 25px;
+        }
+
+        .admin-box {
+            display: inline-block;
+            background-color: white;
+            width: 28%;
+            padding: 15px;
+            margin: 8px;
+            vertical-align: top;
+        }
+
+        h2 {
+            color: #513878;
+        }
+
+        input, select {
+            padding: 9px;
+            margin: 8px;
+            width: 80%;
+        }
+
+        button {
+            background-color: #513878;
+            color: white;
+            padding: 10px 16px;
+            border: none;
+            margin: 6px;
+            cursor: pointer;
+        }
+
+        .candidate {
+            background-color: #f0ebf8;
+            padding: 12px;
+            margin: 10px;
+            text-align: left;
+        }
+
+        footer {
+            background-color: #513878;
+            color: white;
+            padding: 12px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>VoteOnline</h1>
+    <p>Your Vote, Your Right, Your Future</p>
+</header>
+
+<!-- VOTER SECTION -->
+
+<div class="voting-area">
+
+    <h2>Voter Login</h2>
+
+    <form onsubmit="voterLogin(event)">
+        <input type="text" id="voterId" placeholder="Enter Voter ID" required>
+        <input type="password" placeholder="Enter Password" required>
+        <button type="submit">Login</button>
+    </form>
+
+    <hr>
+
+    <h2>OTP Verification</h2>
+
+    <input type="text" id="otp" placeholder="Enter OTP">
+    <br>
+    <button onclick="sendOTP()">Get OTP</button>
+    <button onclick="verifyOTP()">Verify OTP</button>
+
+    <hr>
+
+    <h2>Election Candidates</h2>
+
+    <div class="candidate">
+        <input type="radio" name="candidate" value="Candidate A" style="width:auto">
+        Candidate A
+    </div>
+
+    <div class="candidate">
+        <input type="radio" name="candidate" value="Candidate B" style="width:auto">
+        Candidate B
+    </div>
+
+    <div class="candidate">
+        <input type="radio" name="candidate" value="Candidate C" style="width:auto">
+        Candidate C
+    </div>
+
+    <button onclick="submitVote()">Submit Vote</button>
+
+    <p id="message"></p>
+
+</div>
+
+<!-- ADMIN SECTION -->
+
+<div class="admin-area">
+
+    <h2>Administrator Panel</h2>
+
+    <div class="admin-box">
+        <h3>Candidate Management</h3>
+
+        <input type="text" id="candidateName" placeholder="Candidate Name">
+        <button onclick="createCandidate()">Add Candidate</button>
+
+        <br>
+        <button onclick="allocateCandidate()">Allocate Candidate</button>
+    </div>
+
+    <div class="admin-box">
+        <h3>Election Management</h3>
+
+        <input type="date" id="electionDate">
+        <button onclick="setElection()">Set Election Date</button>
+
+        <br>
+        <button onclick="allocateWard()">Allocate Ward</button>
+    </div>
+
+    <div class="admin-box">
+        <h3>Voter Management</h3>
+
+        <input type="text" placeholder="Voter Name">
+        <input type="text" placeholder="Voter ID">
+
+        <button onclick="createVoter()">Create Voter</button>
+        <br>
+        <button onclick="importVoters()">Import Voter List</button>
+        <button onclick="viewVoters()">View Voter List</button>
+        <button onclick="updateVoters()">Update Voter List</button>
+    </div>
+
+    <div class="admin-box">
+        <h3>Election Results</h3>
+        <button onclick="getResults()">View Election Results</button>
+    </div>
+
+</div>
+
+<footer>
+    <p>VoteOnline - Secure Online Voting Platform</p>
+</footer>
+
+<script>
+    let otpGenerated = false;
+    let voteSubmitted = false;
+
+    function voterLogin(event) {
+        event.preventDefault();
+        alert("Voter login successful!");
+    }
+
+    function sendOTP() {
+        otpGenerated = true;
+        alert("OTP sent successfully!");
+    }
+
+    function verifyOTP() {
+        if (otpGenerated) {
+            alert("OTP verified successfully!");
+        } else {
+            alert("Please request OTP first!");
+        }
+    }
+
+    function submitVote() {
+        let candidate = document.querySelector(
+            'input[name="candidate"]:checked'
+        );
+
+        if (candidate == null) {
+            alert("Please select a candidate!");
+        } else if (voteSubmitted) {
+            alert("You have already submitted your vote!");
+        } else {
+            voteSubmitted = true;
+            document.getElementById("message").innerHTML =
+                "Vote submitted successfully!";
+            alert("Your vote for " + candidate.value + " has been submitted!");
+        }
+    }
+
+    function createCandidate() {
+        let name = document.getElementById("candidateName").value;
+
+        if (name == "") {
+            alert("Enter candidate name!");
+        } else {
+            alert(name + " added successfully!");
+        }
+    }
+
+    function allocateCandidate() {
+        alert("Candidate allocated to election!");
+    }
+
+    function setElection() {
+        alert("Election date allocated!");
+    }
+
+    function allocateWard() {
+        alert("Voter ward allocated successfully!");
+    }
+
+    function createVoter() {
+        alert("Voter added successfully!");
+    }
+
+    function importVoters() {
+        alert("Voter list imported successfully!");
+    }
+
+    function viewVoters() {
+        alert("Displaying voter list!");
+    }
+
+    function updateVoters() {
+        alert("Voter list updated!");
+    }
+
+    function getResults() {
+        alert("Displaying election results!");
+    }
+</script>
+
+</body>
+</html>

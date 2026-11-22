@@ -1,0 +1,336 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ComplainEase</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background-color: #edf1f5;
+            margin: 0;
+        }
+
+        header {
+            background-color: #34495e;
+            color: white;
+            padding: 18px;
+            text-align: center;
+        }
+
+        .intro {
+            background-color: #f39c12;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .container {
+            display: flex;
+            gap: 15px;
+            padding: 20px;
+        }
+
+        .column {
+            background-color: white;
+            padding: 15px;
+            flex: 1;
+            border: 1px solid #ccd3da;
+        }
+
+        h2 {
+            color: #34495e;
+            border-bottom: 2px solid #f39c12;
+            padding-bottom: 8px;
+        }
+
+        input, select, textarea {
+            width: 95%;
+            padding: 8px;
+            margin: 7px 0;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            height: 65px;
+        }
+
+        button {
+            background-color: #e67e22;
+            color: white;
+            border: none;
+            padding: 9px 12px;
+            margin: 5px 0;
+            cursor: pointer;
+        }
+
+        .info {
+            background-color: #eaf0f5;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        footer {
+            background-color: #34495e;
+            color: white;
+            padding: 12px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>ComplainEase</h1>
+    <p>Online Complaint Management System</p>
+</header>
+
+<div class="intro">
+    <h2>Raise Your Complaint, Track Its Progress</h2>
+    <p>A simple platform for submitting and resolving complaints.</p>
+</div>
+
+<div class="container">
+
+    <!-- USER SECTION -->
+    <div class="column">
+        <h2>User Panel</h2>
+
+        <h3>Register</h3>
+        <form onsubmit="registerUser(event)">
+            <input type="text" placeholder="Full Name" required>
+            <input type="email" placeholder="Email" required>
+            <input type="password" placeholder="Password" required>
+            <button type="submit">Register</button>
+        </form>
+
+        <hr>
+
+        <h3>User Login</h3>
+        <form onsubmit="loginUser(event)">
+            <input type="email" placeholder="Email" required>
+            <input type="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+
+        <hr>
+
+        <h3>Post Complaint</h3>
+        <form onsubmit="postComplaint(event)">
+            <input type="text" placeholder="Complaint Title" required>
+
+            <select required>
+                <option value="">Select Category</option>
+                <option>Water Problem</option>
+                <option>Electricity Problem</option>
+                <option>Road Problem</option>
+                <option>Other</option>
+            </select>
+
+            <textarea placeholder="Describe your complaint" required></textarea>
+            <input type="text" placeholder="Location" required>
+            <input type="file">
+            <button type="submit">Submit Complaint</button>
+        </form>
+
+        <hr>
+
+        <h3>Complaint Status</h3>
+        <input type="text" id="complaintId" placeholder="Enter Complaint ID">
+        <button onclick="checkStatus()">Check Status</button>
+
+        <h3>Feedback</h3>
+        <textarea placeholder="Enter your feedback"></textarea>
+        <button onclick="sendFeedback()">Submit Feedback</button>
+
+        <div class="info">
+            <b>Admin Contact</b>
+            <p>Email: admin@complainease.com</p>
+            <p>Phone: 9876543210</p>
+        </div>
+    </div>
+
+    <!-- OFFICER SECTION -->
+    <div class="column">
+        <h2>Officer Panel</h2>
+
+        <h3>Officer Registration</h3>
+        <form onsubmit="registerOfficer(event)">
+            <input type="text" placeholder="Officer Name" required>
+            <input type="email" placeholder="Email" required>
+            <input type="password" placeholder="Password" required>
+            <button type="submit">Register</button>
+        </form>
+
+        <hr>
+
+        <h3>Officer Login</h3>
+        <form onsubmit="loginOfficer(event)">
+            <input type="text" placeholder="Officer ID" required>
+            <input type="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+
+        <hr>
+
+        <h3>Complaint Details</h3>
+        <div class="info">
+            <p>Complaint ID: CE101</p>
+            <p>Issue: Road Damage</p>
+            <p>Location: Chennai</p>
+        </div>
+
+        <button onclick="viewComplaint()">View Complaint</button>
+
+        <h3>Update Complaint</h3>
+        <select id="status">
+            <option>Pending</option>
+            <option>In Progress</option>
+            <option>Resolved</option>
+        </select>
+
+        <input type="file" id="proof">
+        <button onclick="updateComplaint()">Update Status</button>
+        <button onclick="uploadProof()">Upload Work Proof</button>
+    </div>
+
+    <!-- ADMIN SECTION -->
+    <div class="column">
+        <h2>Admin Panel</h2>
+
+        <h3>Officer Account Creation</h3>
+        <form onsubmit="createOfficer(event)">
+            <input type="text" placeholder="Officer Name" required>
+            <input type="text" placeholder="Generate Officer ID" required>
+            <input type="password" placeholder="Set Password" required>
+            <button type="submit">Create Account</button>
+        </form>
+
+        <hr>
+
+        <h3>Account Management</h3>
+        <button onclick="viewAccounts()">View Accounts</button>
+        <button onclick="deleteAccount()">Delete Account</button>
+        <button onclick="changePassword()">Change Password</button>
+
+        <hr>
+
+        <h3>Complaint Management</h3>
+        <button onclick="viewAllComplaints()">View All Complaints</button>
+        <button onclick="manageOfficers()">Manage Officers</button>
+
+        <hr>
+
+        <h3>Feature Control</h3>
+        <select id="feature">
+            <option>Feedback</option>
+            <option>Complaint Submission</option>
+            <option>Complaint Tracking</option>
+        </select>
+
+        <button onclick="hideFeature()">Hide Feature</button>
+
+        <hr>
+
+        <h3>Insert Information</h3>
+        <textarea placeholder="Enter website information"></textarea>
+        <button onclick="addInformation()">Add Information</button>
+    </div>
+
+</div>
+
+<footer>
+    <p>ComplainEase - Your Complaint, Our Responsibility</p>
+</footer>
+
+<script>
+    function registerUser(event) {
+        event.preventDefault();
+        alert("User registered successfully!");
+    }
+
+    function loginUser(event) {
+        event.preventDefault();
+        alert("User login successful!");
+    }
+
+    function postComplaint(event) {
+        event.preventDefault();
+        alert("Complaint submitted successfully! Your ID is CE101.");
+    }
+
+    function checkStatus() {
+        let id = document.getElementById("complaintId").value;
+
+        if (id == "") {
+            alert("Enter Complaint ID!");
+        } else {
+            alert("Complaint Status: In Progress");
+        }
+    }
+
+    function sendFeedback() {
+        alert("Feedback submitted successfully!");
+    }
+
+    function registerOfficer(event) {
+        event.preventDefault();
+        alert("Officer registration submitted!");
+    }
+
+    function loginOfficer(event) {
+        event.preventDefault();
+        alert("Officer login successful!");
+    }
+
+    function viewComplaint() {
+        alert("Displaying assigned complaints!");
+    }
+
+    function updateComplaint() {
+        let status = document.getElementById("status").value;
+        alert("Complaint status updated to: " + status);
+    }
+
+    function uploadProof() {
+        alert("Work proof uploaded successfully!");
+    }
+
+    function createOfficer(event) {
+        event.preventDefault();
+        alert("Officer account created successfully!");
+    }
+
+    function viewAccounts() {
+        alert("Displaying all user and officer accounts!");
+    }
+
+    function deleteAccount() {
+        alert("Account deleted successfully!");
+    }
+
+    function changePassword() {
+        alert("Password changed successfully!");
+    }
+
+    function viewAllComplaints() {
+        alert("Displaying all complaints!");
+    }
+
+    function manageOfficers() {
+        alert("Officer details displayed!");
+    }
+
+    function hideFeature() {
+        let feature = document.getElementById("feature").value;
+        alert(feature + " feature hidden!");
+    }
+
+    function addInformation() {
+        alert("Website information added successfully!");
+    }
+</script>
+
+</body>
+</html>
